@@ -1,0 +1,22 @@
+{
+  "name": "to_do_list_restful",
+  "version": "1.0.0",
+  "description": "a todo list \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D-do l\u001b[2~c\u001b[2~\u001b[2~d\u001b[D\u001b[D\u001b[2~d00\u001b[C\u001b[D\u001b[D\u001b[D0\u001b[D.j0\u001b[2~g\u001b[Df\u001b[2~\u001b[2~\u001b[2~\u001b[D\u001b[D\u001b[C\u001b[D\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~\u001b[2~f\u001b[2~\u001b[2~\u001b[2~f\u001b[D\u001b[D\u001b[Df\u001b[2~\u001b[2;7~d\u001bto-do list app\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DRESTful to-do list app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "./git/"
+  },
+  "keywords": [
+    "todo",
+    "to-do",
+    "todos",
+    "rest",
+    "mern"
+  ],
+  "author": "joehinmoro",
+  "license": "ISC"
+}
