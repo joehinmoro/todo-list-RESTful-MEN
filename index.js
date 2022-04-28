@@ -36,10 +36,46 @@ app.post("/", (req, res) => {
 // *** TODOS RESTFUL ROUTES ****
 // index route
 app.get("/todos", async (req, res) => {
-    // query all todos from todos model collection
-    const allTodos = await Todo.find({}); //!!!exclude unused fields. ref model collection
-    // console.log(allTodos);
-    res.render("todos/index", { title: "All Todos", allTodos });
+    try {
+        // query all todos from todos model collection
+        const allTodos = await Todo.find({}); //!!!exclude unused fields. ref model collection
+        // console.log(allTodos);
+        res.render("todos/index", { title: "All Todos", allTodos });
+    } catch (error) {
+        // log error and render 404 !!!view
+        console.log(error);
+        res.send(`something went wrong<br><a href="/">home</a>`);
+    }
+});
+
+// new route
+app.get("/todos/new", (req, res) => {
+    try {
+        // render the new todo view
+        res.render("todos/new", { title: "New Todo" });
+    } catch (error) {
+        // log error and render 404 !!!view
+        console.log(error);
+        res.send(`something went wrong<br><a href="/">home</a>`);
+    }
+});
+
+// create route
+app.post("/todos", async (req, res) => {
+    try {
+        // destruct new todo text from req body
+        const { text } = req.body;
+        // create new todo model instance
+        const todo = new Todo({ text });
+        // insert new todo into todos model collection
+        await todo.save();
+        // redirect after inserting
+        res.redirect("/todos");
+    } catch (error) {
+        // log error and render 404 !!!view
+        console.log(error);
+        res.send(`something went wrong<br><a href="/">home</a>`);
+    }
 });
 
 // show route

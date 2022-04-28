@@ -33,3 +33,5 @@ const Todo = mongoose.model("Todo", todoSchema);
 
 // export todos model
 module.exports = Todo;
+
+// mongoose.disconnect();
