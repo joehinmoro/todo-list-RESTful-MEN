@@ -100,6 +100,27 @@ app.get("/todos/:id", async (req, res) => {
     }
 });
 
+// edit route
+app.get("/todos/:id/edit", async (req, res) => {
+    try {
+        // destruct id from url
+        const { id } = req.params;
+        // query for todo document using id
+        const todo = await Todo.findById(id);
+        if (todo) {
+            // render show view if _id is valid
+            res.render("todos/edit", { title: todo.text, todo });
+        } else {
+            // render 404 page if _id is invalid
+            res.send(`something went wrong<br><a href="/">home</a>`);
+        }
+    } catch (error) {
+        // log error and render 404 !!!view
+        console.log(error);
+        res.send(`something went wrong<br><a href="/">home</a>`);
+    }
+});
+
 // start server and listen on port
 app.listen(portNum, () => {
     console.log(`listening on port: ${portNum}`);
