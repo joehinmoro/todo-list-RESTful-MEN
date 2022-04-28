@@ -1,0 +1,24 @@
+<%- include("partials/head") %>
+<section class="container bg-dark text border border-light mt-3 p-2">
+    <a href="/todos" class="btn btn-outline-light">Back</a>
+    <h5 class="mt-2"><%=todo.text%></h5>
+    <h6>Status: <%=todo.isDone?`Completed`:`Pending`%></h6>
+    <h6>Created on: <%=todo.timeCreated%></h6>
+    <% if (todo.timeUpdated) { %>
+    <h6>Last Updated on: <%=todo.timeUpdated%></h6>
+    <% } %>
+    <div class="row">
+        <div class="col-auto"><a href="/todos/<%=todo._id%>/edit" class="btn btn-outline-light">Edit</a></div>
+        <div class="col-auto">
+            <form action="/todos/<%=todo._id%>?done=<%=(todo.isDone)%>&_method=put&location=show" method="post">
+                <button class="btn btn-outline-light"><%=todo.isDone?`Undo`:`Done`%></button>
+            </form>
+        </div>
+        <div class="col-auto">
+            <form action="/todos/<%=todo._id%>?_method=delete" method="post">
+                <button name="delBtn" value="delBtn" class="btn btn-outline-light">Delete</button>
+            </form>
+        </div>
+    </div>
+</section>
+<%- include("partials/foot") %>

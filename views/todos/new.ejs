@@ -1,0 +1,12 @@
+<%- include("partials/head") %>
+<section class="container border-light mt-3 p-2 border">
+    <h2>New Todo</h2>
+    <form action="/todos" method="post">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control bg-dark text-light" name="text" id="floatingInput" placeholder="New todo" />
+            <label for="floatingInput">New todo</label>
+        </div>
+        <div><button class="btn btn-outline-light">Create</button></div>
+    </form>
+</section>
+<%- include("partials/foot") %>

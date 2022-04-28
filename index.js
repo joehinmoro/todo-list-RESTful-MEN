@@ -16,21 +16,53 @@ const app = express();
 app.set("view engine", "ejs");
 // set views directory
 app.set("views", join(__dirname, "views"));
-// set static files directory
-app.set(express.static(join(__dirname, "public")));
 
 // *** MIDDLEWARE ***
+// set static files directory
+app.use(express.static(join(__dirname, "public")));
 // parse url-encoded [form data]
 app.use(express.urlencoded({ extended: true }));
 // override post req to enable certain http verb req
 app.use(methodOverride("_method"));
 
-// test request
+// root routes (redirect to todos/)
 app.get("/", (req, res) => {
-    res.send("Hello World! def");
+    res.redirect("/todos");
+});
+app.post("/", (req, res) => {
+    res.redirect("/todos");
 });
 
 // *** TODOS RESTFUL ROUTES ****
+// index route
+app.get("/todos", async (req, res) => {
+    // query all todos from todos model collection
+    const allTodos = await Todo.find({}); //!!!exclude unused fields. ref model collection
+    // console.log(allTodos);
+    res.render("todos/index", { title: "All Todos", allTodos });
+});
+
+// show route
+app.get("/todos/:id", async (req, res) => {
+    try {
+        // destruct id from url
+        const { id } = req.params;
+        // query todo document by id
+        const todo = await Todo.findById(id);
+        if (todo) {
+            console.log(todo);
+            // render show view if _id is valid
+            res.render("todos/show", { title: todo.text, todo });
+        } else {
+            // render 404 page if _id is invalid
+            res.send(`something went wrong<br><a href="/">home</a>`);
+        }
+    } catch (error) {
+        // log error and render 404 !!!view
+        console.log(error);
+        res.send(`something went wrong<br><a href="/">home</a>`);
+    }
+});
 
 // start server and listen on port
 app.listen(portNum, () => {

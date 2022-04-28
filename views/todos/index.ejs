@@ -1,0 +1,24 @@
+<%- include("partials/head") %>
+<section class="container border border-light mt-3 p-2">
+    <h2>All ToDos</h2>
+    <div class="container">
+        <% for( let todo of allTodos ) { %>
+        <div class="col mt-2">
+            <div class="card bg-dark text-light border-light">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-auto me-auto"><p class="<%=todo.isDone?'text-muted':'';%>"><%= todo.text %></p></div>
+                        <div class="col-auto"><a href="/todos/<%=todo._id%>" class="btn btn-outline-light">Info</a></div>
+                        <div class="col-auto">
+                            <form action="/todos/<%=todo._id%>?done=<%=(todo.isDone)%>&_method=put&location=index" method="post">
+                                <button class="btn btn-outline-light"><%=todo.isDone?`Undo`:`Done`%></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</section>
+<%- include("partials/foot") %>
