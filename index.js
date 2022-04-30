@@ -139,20 +139,18 @@ app.put("/todos/:id", async (req, res) => {
         const { id } = req.params;
         //   query todo document from model collection and destruct _id and isDone fields
         const { _id, isDone } = await Todo.findById(id).select("isDone");
-        console.log(_id, isDone);
+        // console.log(_id, isDone);
         // destruct done status and location query from req query
         const { done, location } = req.query;
-        console.log("done is", done);
+        // console.log("done is", done);
         // verify if todo document exists
         if (_id) {
             // verify if request is for updating done status
             if (done) {
-                // alter done status (isDone)
-                const newTodoStatus = !isDone;
                 // update done status (isDone)
                 await Todo.findByIdAndUpdate(
                     _id,
-                    { isDone: newTodoStatus },
+                    { isDone: !isDone },
                     { runValidators: true, new: true }
                 );
                 // redirect to location where req was made
