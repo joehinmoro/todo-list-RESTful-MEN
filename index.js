@@ -98,7 +98,7 @@ app.get("/todos/:id", async (req, res) => {
         // query todo document by id
         const todo = await Todo.findById(id);
         if (todo) {
-            console.log(todo);
+            // console.log(todo);
             // render show view if _id is valid
             res.render("todos/show", { title: todo.text, todo });
         } else {
@@ -133,6 +133,7 @@ app.get("/todos/:id/edit", async (req, res) => {
     }
 });
 
+// update route
 app.put("/todos/:id", async (req, res) => {
     try {
         // destruct id from req params
@@ -178,6 +179,21 @@ app.put("/todos/:id", async (req, res) => {
             console.log(error);
             res.send(`something went wrong<br><a href="/">home</a>`);
         }
+    } catch (error) {
+        // log error and render 404 !!!view
+        console.log(error);
+        res.send(`something went wrong<br><a href="/">home</a>`);
+    }
+});
+
+// delete route
+app.delete("/todos/:id", async (req, res) => {
+    try {
+        // destruct id from req params
+        const { id } = req.params;
+        // delete todo using id
+        await Todo.findByIdAndDelete(id);
+        res.redirect("/todos");
     } catch (error) {
         // log error and render 404 !!!view
         console.log(error);
